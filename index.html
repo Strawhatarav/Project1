@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="A little interactive invitation made just for you."
+  >
+
+  <title>A Little Invitation</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <main id="invitation">
+
+    <!-- SCENE 1: ENVELOPE INTRO -->
+    <section 
+      id="scene-envelope" 
+      class="scene active"
+      aria-label="Invitation introduction"
+    >
+      <div class="envelope-animation">
+
+        <div class="envelope" id="envelope">
+
+          <!-- Keep these as separate artwork layers. -->
+          <div class="envelope-back" aria-hidden="true"></div>
+          <div class="envelope-front" aria-hidden="true"></div>
+          <div class="envelope-flap" aria-hidden="true"></div>
+
+          <!--The letter and its contents together-->
+          <article class="letter">
+
+            <div class="letter-content">
+
+              <h1>A little surprise...</h1>
+              <p>Hey there, did you miss me?</p>
+              <button type="button" id="intro-continue">
+                Open my letter →
+              </button>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+</html>
