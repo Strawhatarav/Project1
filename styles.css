@@ -1,0 +1,167 @@
+/* =====================================================
+   CUSTOMIZE YOUR ASSETS HERE
+   Replace these example paths with your own files.
+   ===================================================== */
+
+:root {
+  /* Scene backgrounds */
+  --bg-intro: url("assets/backgrounds/intro.jpg");
+  --bg-missed: url("assets/backgrounds/missed.jpg");
+  --bg-hangout: url("assets/backgrounds/hangout.jpg");
+  --bg-date: url("assets/backgrounds/date.jpg");
+  --bg-time: url("assets/backgrounds/time.jpg");
+  --bg-place: url("assets/backgrounds/place.jpg");
+  --bg-company: url("assets/backgrounds/company.jpg");
+  --bg-final: url("assets/backgrounds/final.jpg");
+
+  /* Envelope artwork */
+  --envelope-bodyback: url("assets/envelope/bodyback.svg");
+  --envelope-bodyfront: url("assets/envelope/bodyfront.svg");
+  --envelope-flap: url("assets/envelope/flap.svg");
+  --letter-art: url("assets/envelope/letter.svg");
+
+  /* UI frames */
+  --button-frame: url("assets/ui/button-frame.png");
+  --calendar-frame: url("assets/ui/calendar-frame.png");
+  --clock-face: url("assets/ui/clock-face.png");
+  --place-card-frame: url("assets/ui/place-card-frame.png");
+
+  /* Colors: customize to match your artwork */
+  --colortext: #393044;
+  --color1: #fff8ef;
+  --color2: #e89bb5;
+  --color3: #bd668a;
+  --color4: rgba(255, 248, 239, 0.94);
+  --color5: #786d80;
+  --color6: #f6d3e1;
+
+}
+
+
+/* =====================================================
+   RESET AND BASE DOCUMENT STYLES
+   ===================================================== */
+
+
+* {
+  box-sizing: border-box;
+  border-radius: 0%;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-image: var(--bg-company);
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+img {
+  display: cover;
+  max-width: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+/* =====================================================
+   MAIN INVITATION AND SCENE LAYOUT
+   ===================================================== */
+
+
+#invitation {
+  width: 100%;
+  min-height: 100vh;
+  /*padding: 0;*/
+  display: grid;
+  place-items: center;
+}
+
+
+/* =====================================================
+   ENVELOPE AND LETTER ANIMATION
+   ===================================================== */
+
+#scene-envelope {
+  /*background-image: none;*/
+  width: 80%;
+  height: 80%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  justify-content: center;
+  /*align-items: center;*/
+  justify-items: center;
+  background-color: transparent;
+}
+
+
+.envelope-animation {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.envelope {
+  position: relative;
+  width: min(500px, 90vw);
+  aspect-ratio: 1.93 / 1;
+  flex-shrink: 0;
+  height: auto;
+  margin-inline: auto;
+  background-color: #ffe100;
+}
+
+.letter,
+.envelope-back,
+.envelope-flap,
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  /*width: 500px;
+  height: auto;
+  aspect-ratio: 1.93 / 1;
+  background-position: center;
+  box-sizing: border-box;
+  background-size: cover;*/
+}
+
+.envelope-back {
+  z-index: 1;
+  background-image: var(--envelope-bodyback);
+}
+
+.envelope-front {
+  z-index: 3;
+  background-image: var(--envelope-bodyfront);
+}
+
+.envelope-flap {
+  z-index: 4;
+  background-image: var(--envelope-flap);
+  /*transform-origin: top center;*/
+}
+
+.letter {
+  z-index: 2;
+  background-image: var(--letter-art);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
