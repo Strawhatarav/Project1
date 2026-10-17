@@ -21,9 +21,7 @@
   <main id="invitation">
 
     <!-- SCENE 1: ENVELOPE INTRO -->
-    <section 
-      id="scene-envelope" 
-      class="scene active"
+    <section id="scene-envelope" class="scene active"
       aria-label="Invitation introduction"
     >
       <div class="envelope-animation">
@@ -40,9 +38,9 @@
 
             <div class="letter-content">
 
-              <h1>A little surprise...</h1>
+              <h2>A little surprise...</h2>
               <p>Hey there, did you miss me?</p>
-              <button type="button" id="intro-continue">
+              <button type="button" class="button" id="intro-continue" data-next="scene-missed">
                 Open my letter →
               </button>
 
@@ -55,6 +53,143 @@
       </div>
 
     </section>
+
+
+    <!-- SCENE 2: DID YOU MISS ME? -->
+    <section id="scene-missed" class="scene" hidden>
+
+      <div class="headings">
+        <h1>Did you miss me?</h1>
+      </div>
+      
+      <div class="GIFsandreactions">
+       <div class="character-art">
+         <img
+           src="assets/gifs/missed.gif"
+           alt="Animated character reaction"
+         >
+       </div>
+ 
+       <p id="missed-reaction" class="reaction"
+         aria-live="polite">
+         Be honest now. 👀
+       </p>
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="missed-yes" class="button">
+          Yes!
+        </button>
+
+        <button type="button" id="missed-no" class="button">
+          No
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- SCENE 3: WANNA HANG OUT? -->
+    <section id="scene-hangout" class="scene" hidden>
+
+      <h2>Wanna hang out together?</h2>
+
+      <div class="character-art">
+        <img
+          src="assets/hangout.gif"
+          alt="Animated character asking a question"
+        >
+      </div>
+
+      <p id="hangout-reaction" class="reaction"
+        aria-live="polite">
+        I have a little plan...
+      </p>
+
+      <div class="button-group">
+        <button type="button" id="hangout-yes">
+          YES
+        </button>
+
+        <button type="button" id="hangout-no">
+          NO
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- SCENE 4: CHOOSE A DATE -->
+    <section id="scene-date" class="scene" hidden>
+
+      <div class="headings">
+        <h1>When should we meet?</h1>
+      </div>
+           
+      <div class="subheadings">
+        <p id="date-reaction" class="reaction"
+        aria-live="polite">
+        Pick a day that works for you.
+        </p>
+      </div>
+    
+      <div
+        id="calendar"
+        class="calendar"
+        aria-label="Date selection calendar"
+      >
+        <div class="calendar-header">
+          <button type="button" class="smallbutton" id="previous-month"
+            aria-label="Previous month">
+            &lt;
+          </button>
+
+          <h3 id="calendar-month">Month Year</h3>
+
+          <button type="button" class="smallbutton" id="next-month"
+            aria-label="Next month">
+            &gt;
+          </button>
+        </div>
+
+        <div class="calendar-weekdays"
+          aria-hidden="true">
+          <span>Sun</span>
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
+        </div>
+
+        <div id="calendar-days"
+          class="calendar-days"
+          role="group"
+          aria-label="Choose a day">
+          <!-- JavaScript will create the date buttons here. -->
+        </div>
+      </div>
+
+      <div class="displaydate">
+        <p>
+          <time id="selected-date" datetime="">
+            Selected date:
+            No date selected
+          </time>
+        </p>
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="confirm-date">
+          Set date
+        </button>
+      </div>      
+      
+
+    </section>
+
+
 
   </main>
 
