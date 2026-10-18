@@ -42,3 +42,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }, entranceDelay + entranceDuration);
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const navigationButtons = document.querySelectorAll("[data-next]");
+
+  navigationButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const nextSceneId = button.dataset.next;
+      const nextScene = document.getElementById(nextSceneId);
+
+      if (!nextScene) {
+        console.error(`Scene not found: ${nextSceneId}`);
+        return;
+      }
+
+      document.querySelectorAll(".scene").forEach((scene) => {
+        scene.hidden = true;
+        scene.classList.remove("active");
+      });
+
+      nextScene.hidden = false;
+      nextScene.classList.add("active");
+    });
+  });
+});
