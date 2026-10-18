@@ -19,25 +19,16 @@
   --envelope-bodyfront: url("assets/envelope/bodyfront.svg");
   --envelope-flap: url("assets/envelope/flap.svg");
   --letter-art: url("assets/envelope/letter.svg");
+  --letterbg: url("assets/envelope/letterbg.svg");
 
   /* UI frames */
-  --button-frame: url("assets/ui/button-frame.png");
-  --calendar-frame: url("assets/ui/calendar-frame.png");
+  --button-normal: url("assets/ui/normalbutton.svg");
+  --button-hover: url("assets/ui/hoveredbutton.svg");
+  --button-small: url("assets/ui/smallbutton.svg");
+  --calendar-frame: url("assets/ui/calendar.svg");
   --clock-face: url("assets/ui/clock-face.png");
   --place-card-frame: url("assets/ui/place-card-frame.png");
 
-  /* Colors: customize to match your artwork */
-  --colortext: #393044;
-  --color1: #fff8ef;
-  --color2: #e89bb5;
-  --color3: #bd668a;
-  --color4: rgba(255, 248, 239, 0.94);
-  --color5: #786d80;
-  --color6: #f6d3e1;
-
-  /* Motion settings */
-  --transition-fast: 180ms ease;
-  --transition-normal: 350ms ease;
 }
 
 /* =====================================================
@@ -75,6 +66,113 @@ img {
 }
 
 
+/* =========================================
+   CUSTOM RED BUTTON
+   Normal state + hover state
+   ========================================= */
+
+/*Button base design */
+.button,
+.smallbutton {
+  /* Button dimensions */
+  width: fit-content;
+  height: 50px;
+  aspect-ratio: 3 / 1;
+
+  /* Background image settings */
+  background-color: transparent;
+  background-image: var(--button-normal);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
+  /* Text styling */
+  color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+
+  /* Center the text */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Spacing */
+  padding: 12px 24px;
+
+  /* Remove default button styling */
+  border: none;
+  border-radius: 0;
+  outline-offset: 4px;
+  box-shadow: none;
+
+  /* Interaction */
+  cursor: pointer;
+
+  /* Smooth transitions */
+  transition:
+    background-image 250ms ease,
+    transform 200ms ease,
+    filter 200ms ease;
+
+  /* Keep text above the background */
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /*overflow: visible;*/
+}
+
+/* Hover state */
+.button:hover {
+  background-image: var(--button-hover);
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: none;
+}
+
+
+/* Hover artwork layer */
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--button-hover);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.button:hover::before {
+  opacity: 1;
+}
+
+/* Keep the normal artwork underneath */
+.button {
+  background-image: var(--button-normal);
+}
+
+
+/* Pressed state */
+.button:active {
+  transform: translateY(1px);
+  filter: brightness(0.95);
+}
+
+/* Disabled state */
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  filter: grayscale(35%);
+}
+
+
+
 /* =====================================================
    MAIN INVITATION AND SCENE LAYOUT
    ===================================================== */
@@ -87,7 +185,7 @@ img {
 }
 
 /* =====================================================
-   ENVELOPE AND LETTER ANIMATION
+   SCENE 1 ENVELOPE AND LETTER ANIMATION
    ===================================================== */
 
 #scene-envelope {
@@ -103,7 +201,7 @@ img {
 }
 
 /* =====================================================
-   SCENE 1 ENVELOPE INTRO
+   ENVELOPE INTRO
    ===================================================== */
 
 /*ENVELOPE ENTERS FROM BELOW*/
@@ -256,4 +354,22 @@ img {
   z-index: 5;
   pointer-events: auto;
   cursor: pointer;
+}
+
+
+/* =========================================================
+   SCENE 2 DID U MISSED ME? CHARACTER GIFS AND ILLUSTRATIONS
+   ========================================================= */
+
+
+#scene-missed {
+  width: 80%;
+  aspect-ratio: 1.93 / 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 20px;
+  background-image: var(--letter-art);
+  overflow: visible;
 }
