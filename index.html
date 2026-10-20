@@ -128,58 +128,58 @@
         <h1>When should we meet?</h1>
       </div>
            
-      <div class="subheadings">
-        <p id="date-reaction" class="reaction"
-        aria-live="polite">
-        Pick a day that works for you.
-        </p>
-      </div>
-    
-      <div
-        id="calendar"
-        class="calendar"
-        aria-label="Date selection calendar"
-      >
-        <div class="calendar-header">
-          <button type="button" class="smallbutton" id="previous-month"
-            aria-label="Previous month">
-            &lt;
-          </button>
-
-          <h3 id="calendar-month">Month Year</h3>
-
-          <button type="button" class="smallbutton" id="next-month"
-            aria-label="Next month">
-            &gt;
-          </button>
+      <div class="subheading-calendar-displaydate">
+        <div class="subheadings">
+          <p id="date-reaction" class="reaction"
+          aria-live="polite">
+          Pick a day that works for you.
+          </p>
         </div>
 
-        <div class="calendar-weekdays"
-          aria-hidden="true">
-          <span>Sun</span>
-          <span>Mon</span>
-          <span>Tue</span>
-          <span>Wed</span>
-          <span>Thu</span>
-          <span>Fri</span>
-          <span>Sat</span>
+        <div id="calendar" class="calendar"
+          aria-label="Date selection calendar"
+        >
+          <div class="calendar-header">
+            <button type="button" class="smallbutton" id="previous-month"
+              aria-label="Previous month">
+              &lt;
+            </button>
+  
+            <h3 id="calendar-month">Month Year</h3>
+  
+            <button type="button" class="smallbutton" id="next-month"
+              aria-label="Next month">
+              &gt;
+            </button>
+          </div>
+  
+          <div class="calendar-weekdays"
+            aria-hidden="true">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+          </div>
+  
+          <div id="calendar-days"
+            class="calendar-days"
+            role="group"
+            aria-label="Choose a day">
+            <!-- JavaScript will create the date buttons here. -->
+          </div>
         </div>
 
-        <div id="calendar-days"
-          class="calendar-days"
-          role="group"
-          aria-label="Choose a day">
-          <!-- JavaScript will create the date buttons here. -->
+        <div class="displaydate">
+          <p>
+            <time id="selected-date" datetime="">
+              Selected date:
+              No date selected
+            </time>
+          </p>
         </div>
-      </div>
-
-      <div class="displaydate">
-        <p>
-          <time id="selected-date" datetime="">
-            Selected date:
-            No date selected
-          </time>
-        </p>
       </div>
 
       <div class="button-group">
