@@ -40,6 +40,8 @@
   border-radius: 0%;
   padding: 0;
   margin: 0;
+  border: none;
+  background: transparent;
 }
 
 html {
@@ -57,7 +59,6 @@ body {
 }
 
 img {
-  display: cover;
   max-width: 100%;
 }
 
@@ -151,12 +152,6 @@ img {
   opacity: 1;
 }
 
-/* Keep the normal artwork underneath */
-.button {
-  background-image: var(--button-normal);
-}
-
-
 /* Pressed state */
 .button:active {
   transform: translateY(1px);
@@ -171,7 +166,48 @@ img {
   filter: grayscale(35%);
 }
 
+/*============re used===================*/
 
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  gap: 8px;
+}
+
+/* Both buttons start with equal space */
+.button-group .button {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 10px;
+  position: relative;
+
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  transition:
+    flex-grow 450ms ease,
+    flex-basis 450ms ease,
+    opacity 300ms ease,
+    transform 180ms ease;
+}
+
+.scene {
+  width: 1000px;
+  aspect-ratio: 1.93 / 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-image: var(--letterbg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+  overflow: visible;
+}
 
 /* =====================================================
    MAIN INVITATION AND SCENE LAYOUT
@@ -182,11 +218,11 @@ img {
   min-height: 100vh;
   display: grid;
   place-items: center;
-}
+} 
 
-/* =====================================================
-   SCENE 1 ENVELOPE AND LETTER ANIMATION
-   ===================================================== */
+/* ===========================================
+   ===SCENE 1 ENVELOPE AND LETTER ANIMATION===
+   =========================================== */
 
 #scene-envelope {
   width: 80%;
@@ -198,14 +234,16 @@ img {
   justify-items: center;
   background-color: transparent;
   overflow: visible;
+  background-image: none;
 }
 
-/* =====================================================
-   ENVELOPE INTRO
-   ===================================================== */
+#scene-envelope button {
+  height: auto;
+  padding: 15px 35px;
+}
 
+/* ENVELOPE INTRO */
 /*ENVELOPE ENTERS FROM BELOW*/
-
 .envelope-animation {
   width: 100%;
   max-width: 600px;
@@ -356,20 +394,87 @@ img {
   cursor: pointer;
 }
 
+/* =================================================================
+   ====SCENE 2 DID U MISSED ME? CHARACTER GIFS AND ILLUSTRATIONS====
+   ================================================================= */
 
-/* =========================================================
-   SCENE 2 DID U MISSED ME? CHARACTER GIFS AND ILLUSTRATIONS
-   ========================================================= */
 
+.headings {
+  width: 100%;
+  height: fit-content;
+  text-align: center; 
+}
 
-#scene-missed {
-  width: 80%;
-  aspect-ratio: 1.93 / 1;
-  padding: 20px;
+h1 {
+  font-size: xx-large;
+  font-weight: 900;
+}
+
+.GIFsandreactions {
+  width: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  padding: 20px;
-  background-image: var(--letter-art);
-  overflow: visible;
+  align-items: center; 
+  gap: 10px;
+}
+
+.character-art {
+  display: grid;
+  place-items: center;
+  width: min(100%, 330px);
+  min-height: 150px;
+  max-height: 250px;
+}
+
+.character-art img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 13px;
+}
+
+.reaction {
+  font-size: small;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ===================YES / NO BUTTON LAYOUT AND ANIMATION====================== */
+
+#scene-missed .button-group {
+  margin-bottom: 30px;
+}
+
+/* Both buttons start with equal space */
+#scene-missed .button-group .button {
+  height: 100px;
+}
+
+/* Yes expands into the space No releases */
+#missed-yes {
+  flex-grow: var(--yes-grow, 1);
+  z-index: 2;
+}
+
+/* No stays within its flex slot */
+#missed-no {
+  flex-grow: var(--no-grow, 1);
+  z-index: 1;
+  transform: translate(
+    var(--no-x, 0px),
+    var(--no-y, 0px)
+  );
+}
+
+/* No disappears after the final attempt */
+#missed-no.no-disappear {
+  flex-grow: 0;
+  flex-basis: 0;
+  min-width: 0;
+  padding-left: 0;
+  padding-right: 0;
+  opacity: 0;
+  pointer-events: none;
 }
