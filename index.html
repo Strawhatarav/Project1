@@ -43,7 +43,7 @@
               <h2>A little surprise...</h2>
               <p>Hey there, did you miss me?</p>
               <button type="button" class="button" id="intro-continue" data-next="scene-missed">
-                Open my letter →
+                Open my letter
               </button>
 
             </div>
@@ -94,26 +94,30 @@
     <!-- SCENE 3: WANNA HANG OUT? -->
     <section id="scene-hangout" class="scene" hidden>
 
-      <h2>Wanna hang out together?</h2>
-
-      <div class="character-art">
-        <img
-          src="assets/hangout.gif"
-          alt="Animated character asking a question"
-        >
+      <div class="headings">
+        <h1>Wanna hang out together?</h1>
       </div>
 
-      <p id="hangout-reaction" class="reaction"
-        aria-live="polite">
-        I have a little plan...
-      </p>
+      <div class="GIFsandreactions">
+        <div class="character-art">
+          <img
+            src="assets/gifs/hangout.gif"
+            alt="Animated character asking a question"
+          >
+        </div>
+  
+        <p id="hangout-reaction" class="reaction"
+          aria-live="polite">
+          I have a little plan...
+        </p>
+      </div>
 
       <div class="button-group">
-        <button type="button" id="hangout-yes">
+        <button type="button" class="button" id="hangout-yes">
           YES
         </button>
 
-        <button type="button" id="hangout-no">
+        <button type="button" class="button" id="hangout-no">
           NO
         </button>
       </div>
@@ -129,6 +133,7 @@
       </div>
            
       <div class="subheading-calendar-displaydate">
+
         <div class="subheadings">
           <p id="date-reaction" class="reaction"
           aria-live="polite">
@@ -172,26 +177,35 @@
           </div>
         </div>
 
-        <div class="displaydate">
-          <p>
-            <time id="selected-date" datetime="">
-              Selected date:
-              No date selected
-            </time>
-          </p>
+        <div class="displaydate-setbutton">
+
+          <div class="empty">
+          </div>
+
+          <div class="displaydate">
+            <p>
+              <time id="selected-date" datetime="">
+                Selected date:
+                No date selected
+              </time>
+            </p>
+          </div>
+
+          <div class="inner">
+            
+            <div class="button-group">
+              <button type="button" class="button" id="confirm-date">
+                Set date
+              </button>
+            </div>  
+
+          </div>
+
         </div>
+
       </div>
 
-      <div class="button-group">
-        <button type="button" class="button" id="confirm-date">
-          Set date
-        </button>
-      </div>      
-      
-
-    </section>
-    
-
+    </section>     
 
   </main>
 
