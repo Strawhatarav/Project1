@@ -1,13 +1,8 @@
-// ======================================================
-// ANIME INVITATION WEBSITE
-// Complete JavaScript controller
-// ======================================================
+/*=======================js for invitation=======================*/
 
 "use strict";
 
-// ======================================================
-// 1. HELPER FUNCTIONS
-// ======================================================
+/*=======================HELPER FUNCTIONS=======================*/
 
 const $ = (selector, parent = document) =>
   parent.querySelector(selector);
@@ -60,11 +55,7 @@ function formatTime(totalMinutes) {
     .padStart(2, "0")} ${suffix}`;
 }
 
-
-// ======================================================
-// 2. SHARED INVITATION STATE
-// Stores the visitor's selections.
-// ======================================================
+/*=======================SHARED INVITATION STATE=======================*/
 
 const invitation = {
   date: null,
@@ -75,10 +66,7 @@ const invitation = {
   customCompany: ""
 };
 
-
-// ======================================================
-// 3. SCENE NAVIGATION
-// ======================================================
+/*=======================SCENE NAVIGATION=======================*/
 
 function showScene(sceneId) {
   const nextScene = document.getElementById(sceneId);
@@ -118,8 +106,7 @@ $$("[data-next]").forEach((button) => {
   });
 });
 
-
-/* ================================= SCENE 1: envelope animation ================================= */
+/*=======================SCENE 1: envelope animation=======================*/
 
 document.addEventListener("DOMContentLoaded", () => {
   const envelope = document.querySelector("#envelope");
@@ -164,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }, entranceDelay + entranceDuration);
 });
 
-/* ================================= SCENE 2: Missed buttons ================================= */
+/*=======================SCENE 2: Missed buttons=======================*/
 
 const missedYes = $("#missed-yes");
 const missedNo = $("#missed-no");
@@ -226,8 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ================================= SCENE 2: Missed buttons ================================= */
-
+/*Missed buttons*/
 document.addEventListener("DOMContentLoaded", () => {
   const yesButton = document.querySelector("#missed-yes");
   const noButton = document.querySelector("#missed-no");
@@ -289,6 +275,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Clicking No triggers the effect.
   noButton.addEventListener("click", dodgeNo);
 
-  // Uncomment this line if you also want No to dodge on hover.
-  // noButton.addEventListener("pointerenter", dodgeNo);
 });
