@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const maxAttempts = 4;
 
   // How much space each button receives.
-  const yesGrowth = [1.25, 1.7, 2.5, 4];
+  const yesGrowth = [1.25, 1.7, 2.5, 8];
   const noGrowth = [0.75, 0.5, 0.25, 0];
 
   // Small movements so No dances without covering Yes.
@@ -276,3 +276,101 @@ document.addEventListener("DOMContentLoaded", () => {
   noButton.addEventListener("click", dodgeNo);
 
 });
+
+/*=======================SCENE 3: Wanna hangout?=======================*/
+
+const hangoutYes = $("#hangout-yes");
+const hangoutNo = $("#hangout-no");
+console.log("Hangout NO button:", hangoutNo);
+
+/* =======================YES BUTTON=======================*/
+
+hangoutYes?.addEventListener("click", () => {
+  setReaction(
+    "#date-reaction",
+    "Excellent. Now, when are you free? 💗"
+  );
+
+  showScene("scene-date");
+});
+
+
+/* =======================NO BUTTON: FIVE-POSITION ESCAPE LOOP=======================*/
+
+if (hangoutNo) {
+
+const positions = [
+  { x: 0,    y: 0    },  // 1. Original position: bottom
+  { x: -750, y: 100  },  // 3. Left
+  { x: -600, y: -400 },  // 2. Upper-left
+  { x: 370,  y: -450 },  // 4. Upper-right
+  { x: 300,  y: 100  }   // 5. Right
+];
+
+  const reactions = [
+    "Hey! You almost caught me! 😳",
+    "Nope! Try again! 💨",
+    "Almost! But not quite! 😂",
+    "You really want to catch me, huh? 👀",
+    "I'm back where I started! 💗"
+  ];
+
+  let currentPosition = 0;
+  let movementCount = 0;
+  let canEscape = true;
+
+  const escapeDistance = 75;
+
+  document.addEventListener("pointermove", (event) => {
+
+    // Ignore touch movement.
+    if (event.pointerType === "touch") return;
+
+    if (!canEscape) return;
+
+    const rect = hangoutNo.getBoundingClientRect();
+
+    // Find the closest point on the button to the cursor.
+    const closestX = Math.max(
+      rect.left,
+      Math.min(event.clientX, rect.right)
+    );
+
+    const closestY = Math.max(
+      rect.top,
+      Math.min(event.clientY, rect.bottom)
+    );
+
+    const distance = Math.hypot(
+      event.clientX - closestX,
+      event.clientY - closestY
+    );
+
+    // Move only when the cursor gets close to the button.
+    if (distance <= escapeDistance) {
+
+      canEscape = false;
+
+      currentPosition =
+        (currentPosition + 1) % positions.length;
+
+      const position = positions[currentPosition];
+
+      hangoutNo.style.transform =
+        `translate(${position.x}px, ${position.y}px)`;
+
+      setReaction(
+        "#hangout-reaction",
+        reactions[movementCount % reactions.length]
+      );
+
+      movementCount++;
+
+      setTimeout(() => {
+        canEscape = true;
+      }, 350);
+    }
+
+  });
+}
+
