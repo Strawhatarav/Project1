@@ -498,3 +498,170 @@ h1 {
   will-change: transform;
   z-index: 10;
 }
+
+
+/* ===========================
+   ===SCENE 4 CHOOSE A DATE===
+   =========================== */
+
+.subheading-calendar-displaydate {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.subheadings {
+  width: 100%;
+  height: fit-content;
+}
+
+/* CALENDAR MAIN CONTAINER */
+.calendar {
+  width: 300px;
+  height: fit-content;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+  gap: 6px;
+  border-radius: 16px;
+  align-items: center;
+  padding-top: 13px;
+  border: 4px solid rgb(207, 0, 0);
+}
+
+/* MONTH HEADER */
+.calendar-header {
+  display: grid;
+  gap: 5px;
+  height: 50px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  grid-auto-flow: column;
+  width: 260px;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  border: 4px solid rgb(207, 0, 0);
+}
+
+/* Previous, Month-year text and next arrows */
+.calendar-header button {
+  width: 45px;
+  height: 30px;
+  background-image: var(--button-small);
+  font-size: 20px;
+  font-weight: 900;
+  padding: 0px;
+}
+
+/* WEEKDAY HEADER */
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 30px);
+  gap: 5px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  width: 260px;
+  height: fit-content;
+  border: 4px solid rgb(207, 0, 0);
+}
+
+/* weekdays */
+.calendar-weekdays > * {
+  min-width: 0;
+  text-align: center;
+  font-size: clamp(10px, 2.5vw, 15px);
+  font-weight: 700;
+  color: #171717;
+}
+
+/* NUMERIC DATE GRID */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 30px);
+  grid-auto-rows: 30px;
+  gap: 5px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 0px 0px 16px 16px;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+}
+
+/* Date buttons */
+.calendar-days {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  padding: 0;
+
+  background: transparent;
+  color: #171717;
+  border: none;
+  border-radius: 0;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 400;
+
+  cursor: pointer;
+  overflow: visible;
+}
+
+/*=============================================================*/
+
+.displaydate-setbutton {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+}
+
+.empty {
+  width: 33.3%;
+}
+
+.displaydate {
+  background-color: #ffffff;
+    text-align: center;
+    width: 270px;
+    border-radius: 12px;
+    padding: 3px 16px;
+    border: 3px solid black;
+}
+
+.inner {
+  width: 33.3%;
+  height: fit-content;
+}
+
+#scene-date .button-group {
+  height: fit-content;
+  width: 100%;
+  margin: 0px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#scene-date .button {
+  height: fit-content;
+  padding: 10px;
+  width: 100px;
+  flex: none;
+}
+
+
