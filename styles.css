@@ -594,8 +594,8 @@ h1 {
   height: 200px;
 }
 
-/* Date buttons */
-.calendar-days {
+/* Individual date buttons */
+.calendar-days .calendar-day {
   position: relative;
   isolation: isolate;
 
@@ -614,11 +614,87 @@ h1 {
   border-radius: 0;
 
   font-family: inherit;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 11px;
+  font-weight: 600;
 
   cursor: pointer;
   overflow: visible;
+}
+
+/* Pixelated heart shape*/
+.calendar-days .calendar-day::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 30px;
+  height: 30px;
+  inset: 0;
+  margin: auto;
+
+  background-color: #d3d3d3;
+
+  clip-path: polygon(
+    0% 25%,
+    12.5% 25%,
+    12.5% 12.5%,
+    37.5% 12.5%,
+    37.5% 25%,
+    62.5% 25%,
+    62.5% 12.5%,
+    87.5% 12.5%,
+    87.5% 25%,
+    100% 25%,
+    100% 62.5%,
+    87.5% 62.5%,
+    87.5% 75%,
+    75% 75%,
+    75% 87.5%,
+    62.5% 87.5%,
+    62.5% 100%,
+    37.5% 100%,
+    37.5% 87.5%,
+    25% 87.5%,
+    25% 75%,
+    12.5% 75%,
+    12.5% 62.5%,
+    0% 62.5%
+  );
+
+  transition: background-color 180ms ease;
+  pointer-events: none;
+}
+
+/* Hover effect for unselected dates */
+.calendar-days .calendar-day:hover:not(:disabled):not(.selected)::before {
+  background-color: #ff3232;
+}
+
+/* Selected date: red heart */
+.calendar-days .calendar-day.selected::before,
+.calendar-days .calendar-day[aria-pressed="true"]::before {
+  background-color: #ed0028;
+}
+
+/* Selected date: white number */
+.calendar-days .calendar-day.selected,
+.calendar-days .calendar-day[aria-pressed="true"] {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+/* Keyboard accessibility */
+.calendar-days .calendar-day:focus-visible {
+  outline: 2px solid #7c0010;
+  outline-offset: -2px;
+}
+
+/* Disabled dates */
+.calendar-days button:disabled {
+  cursor: not-allowed;
+}
+
+.calendar-days .calendar-day:disabled {
+  opacity: 0.35;
 }
 
 /*=============================================================*/
