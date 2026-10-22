@@ -374,3 +374,128 @@ const positions = [
   });
 }
 
+/* ================================= SCENE 4: Calendar ================================= */
+
+const calendarDays = $("#calendar-days");
+const calendarMonth = $("#calendar-month");
+const selectedDateOutput = $("#selected-date");
+
+const previousMonthButton = $("#previous-month");
+const nextMonthButton = $("#next-month");
+const confirmDateButton = $("#confirm-date");
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+let visibleMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+function renderCalendar() {
+  if (!calendarDays || !calendarMonth) return;
+
+  calendarDays.replaceChildren();
+
+  calendarMonth.textContent = new Intl.DateTimeFormat("en-IN", {
+    month: "short",
+    year: "numeric"
+  }).format(visibleMonth);
+
+  const year = visibleMonth.getFullYear();
+  const month = visibleMonth.getMonth();
+
+  const firstWeekday = new Date(year, month, 1).getDay();
+  const numberOfDays = new Date(year, month + 1, 0).getDate();
+
+  // Blank cells before the first day of the month.
+  for (let i = 0; i < firstWeekday; i++) {
+    const blank = document.createElement("span");
+    blank.className = "calendar-empty";
+    blank.setAttribute("aria-hidden", "true");
+    calendarDays.append(blank);
+  }
+
+  for (let day = 1; day <= numberOfDays; day++) {
+    const date = new Date(year, month, day);
+    const dateKey = localDateKey(date);
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "calendar-day";
+    button.textContent = String(day);
+    button.dataset.date = dateKey;
+
+    button.setAttribute("aria-label", formatDate(date));
+
+    // Do not allow dates before today.
+    if (date < today) {
+      button.disabled = true;
+      button.setAttribute("aria-disabled", "true");
+    }
+
+    if (invitation.date && dateKey === localDateKey(invitation.date)) {
+      button.classList.add("selected");
+      button.setAttribute("aria-pressed", "true");
+    } else {
+      button.setAttribute("aria-pressed", "false");
+    }
+
+    button.addEventListener("click", () => {
+      invitation.date = date;
+
+      renderCalendar();
+
+      if (selectedDateOutput) {
+        selectedDateOutput.textContent = formatDate(date);
+        selectedDateOutput.dateTime = dateKey;
+      }
+
+      setReaction(
+        "#date-reaction",
+        `Oho, ${formatDate(date)}? I'll keep that in mind. 💗`
+      );
+    });
+
+    calendarDays.append(button);
+  }
+
+  // Don't allow navigating into a month before the current one.
+  if (previousMonthButton) {
+    previousMonthButton.disabled =
+      year === today.getFullYear() && month === today.getMonth();
+  }
+
+  if (nextMonthButton) {
+    nextMonthButton.disabled = false;
+  }
+}
+
+previousMonthButton?.addEventListener("click", () => {
+  visibleMonth = new Date(
+    visibleMonth.getFullYear(),
+    visibleMonth.getMonth() - 1,
+    1
+  );
+
+  renderCalendar();
+});
+
+nextMonthButton?.addEventListener("click", () => {
+  visibleMonth = new Date(
+    visibleMonth.getFullYear(),
+    visibleMonth.getMonth() + 1,
+    1
+  );
+
+  renderCalendar();
+});
+
+confirmDateButton?.addEventListener("click", () => {
+  if (!invitation.date) {
+    setReaction("#date-reaction", "Pick a date first, silly. 💗");
+    return;
+  }
+
+  showScene("scene-time");
+});
+
+renderCalendar();
+
