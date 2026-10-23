@@ -207,6 +207,87 @@
 
     </section>     
 
+    
+    <!-- SCENE 5: CHOOSE A TIME -->
+    <section id="scene-time" class="scene" hidden>
+
+      <div class="headings">
+        <h1>And what time should we meet?</h1>
+      </div>
+
+      <div class="subheading-clock-displaytime">
+
+        <div class="subheadings">
+          <p id="time-reaction" class="reaction"
+          aria-live="polite">
+          Your turn to set the clock.
+          </p>
+        </div>
+
+        <div class="clock" id="clock"
+          role="group" aria-label="Interactive clock">
+  
+          <span class="clock-number twelve">12</span>
+          <span class="clock-number three">3</span>
+          <span class="clock-number six">6</span>
+          <span class="clock-number nine">9</span>
+  
+          <div class="clock-hand hour-hand"
+            id="hour-hand"></div>
+  
+          <div class="clock-hand minute-hand"
+            id="minute-hand"></div>
+  
+          <div class="clock-center"></div>
+        </div>
+
+        <div class="displaytime-setbutton">
+
+          <div class="empty">
+          </div>
+
+          <div class="displaytime">
+            
+            <span class="time-label">Selected time:</span>
+          
+            <div class="time-edit-area">
+              <button
+                type="button"
+                id="edit-time"
+                aria-label="Edit selected time"
+              >
+                <span id="selected-time">07:00 PM</span>
+              </button>
+          
+              <input
+                type="text"
+                id="manual-time"
+                value="07:00 PM"
+                placeholder="07:00 PM"
+                aria-label="Enter time, for example 07:00 PM"
+                maxlength="8"
+                hidden
+              >
+            </div>
+      
+          </div>
+
+          <div class="inner">
+            
+            <div class="button-group">
+              <button type="button" class="button" id="confirm-time">
+                Set time
+              </button>
+            </div>  
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>    
+
   </main>
 
 </body>
