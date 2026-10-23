@@ -26,7 +26,7 @@
   --button-hover: url("assets/ui/hoveredbutton.svg");
   --button-small: url("assets/ui/smallbutton.svg");
   --calendar-frame: url("assets/ui/calendar.svg");
-  --clock-face: url("assets/ui/clock-face.png");
+  --clock-face: url("assets/ui/clock.svg");
   --place-card-frame: url("assets/ui/place-card-frame.png");
 
 }
@@ -725,6 +725,7 @@ h1 {
   height: fit-content;
 }
 
+#scene-time .button-group,
 #scene-date .button-group {
   height: fit-content;
   width: 100%;
@@ -733,6 +734,7 @@ h1 {
   justify-content: flex-end;
 }
 
+#scene-time .button,
 #scene-date .button {
   height: fit-content;
   padding: 10px;
@@ -740,4 +742,147 @@ h1 {
   flex: none;
 }
 
+/* ===========================
+   ===SCENE 5 CHOOSE A TIME===
+   =========================== */
 
+.subheading-clock-displaytime {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+/*====================================clock====================================*/
+
+.clock {
+  position: relative;
+  width: min(68vw, 310px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: #a28e6b;
+  background-image: var(--clock-face);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  touch-action: none;
+  user-select: none;
+  align-self: center;
+}
+
+.clock-number {
+  position: absolute;
+  z-index: 1;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  color: transparent;
+  pointer-events: none;
+}
+
+.twelve {
+  top: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.three {
+  right: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.six {
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nine {
+  left: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.clock-hand {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 50%;
+  border-radius: 10px;
+  background-color: #a28e6b;
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.hour-hand {
+  height: 27%;
+  width: 7px;
+}
+
+.minute-hand {
+  height: 34%;
+  width: 5px;
+}
+
+.clock-center {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: #5f461d;
+  transform: translate(-50%, -50%);
+}
+
+/*===========================================================================*/
+
+.displaytime-setbutton {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+}
+
+.displaytime {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  text-align: center;
+  width: 220px;
+  border-radius: 12px;
+  padding: 3px 0px;
+  border: 3px solid black;
+}
+
+/* Label */
+.time-label {
+    font-size: 16px;
+    line-height: 14px;
+    font-weight: 700;
+    padding: 0px 0px 0px 10px;
+}
+
+/* Fixed area for either the displayed time or input */
+.time-edit-area {
+  width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Clickable displayed time*/ 
+#edit-time {
+  width: fit-content;
+    height: fit-content;
+    padding: 0px 10px;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
