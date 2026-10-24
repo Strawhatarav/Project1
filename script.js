@@ -499,3 +499,336 @@ confirmDateButton?.addEventListener("click", () => {
 
 renderCalendar();
 
+/* ================================= SCENE 5: Clock ================================= */
+
+// DOM elements
+const clock = $("#clock");
+const hourHand = $("#hour-hand");
+const minuteHand = $("#minute-hand");
+const selectedTimeOutput = $("#selected-time");
+const manualTimeInput = $("#manual-time");
+const editTimeButton = $("#edit-time");
+const confirmTimeButton = $("#confirm-time");
+
+// Track which clock hand is being dragged.
+let activeClockHand = null;
+
+
+/* ===========================
+   === UPDATE CLOCK DISPLAY ===
+   =========================== */
+
+function updateClockDisplay() {
+  // Keep the time within a 24-hour day.
+  invitation.timeMinutes =
+    ((invitation.timeMinutes % 1440) + 1440) % 1440;
+
+  const hours24 = Math.floor(invitation.timeMinutes / 60);
+  const minutes = invitation.timeMinutes % 60;
+
+  // Update the visible selected-time display.
+  if (selectedTimeOutput) {
+    selectedTimeOutput.textContent =
+      formatTime(invitation.timeMinutes);
+  }
+
+  // Calculate the clock-hand angles.
+  const hourAngle =
+    ((hours24 % 12) + minutes / 60) * 30;
+
+  const minuteAngle = minutes * 6;
+
+  // Rotate the hour hand.
+  if (hourHand) {
+    hourHand.style.transform =
+      `translateX(-50%) rotate(${hourAngle}deg)`;
+  }
+
+  // Rotate the minute hand.
+  if (minuteHand) {
+    minuteHand.style.transform =
+      `translateX(-50%) rotate(${minuteAngle}deg)`;
+  }
+
+  // Keep the manual input synchronized.
+  if (manualTimeInput) {
+    manualTimeInput.value =
+      formatTime(invitation.timeMinutes);
+  }
+}
+
+
+/* ===========================
+   === MANUAL TIME EDITING ===
+   =========================== */
+
+// Clicking the displayed time opens the text input.
+editTimeButton?.addEventListener("click", () => {
+  if (!manualTimeInput) return;
+
+  // Display the current selected time in the input.
+  manualTimeInput.value =
+    formatTime(invitation.timeMinutes);
+
+  // Show the input and hide the display button.
+  manualTimeInput.hidden = false;
+  editTimeButton.hidden = true;
+
+  // Focus the input and select its current text.
+  manualTimeInput.focus();
+  manualTimeInput.select();
+});
+
+
+/* ===========================
+   === PARSE MANUAL TIME ===
+   =========================== */
+
+// Convert a time such as "07:30 PM" into minutes since midnight.
+function parseManualTime(value) {
+  const match = value.trim().match(
+    /^(0?[1-9]|1[0-2]):([0-5]\d)\s*(AM|PM)$/i
+  );
+
+  // Reject invalid formats.
+  if (!match) return null;
+
+  let hours = Number(match[1]);
+  const minutes = Number(match[2]);
+  const period = match[3].toUpperCase();
+
+  // Convert 12-hour time to 24-hour time.
+  if (period === "AM" && hours === 12) {
+    hours = 0;
+  } else if (period === "PM" && hours !== 12) {
+    hours += 12;
+  }
+
+  return hours * 60 + minutes;
+}
+
+
+/* ===========================
+   === FINISH TIME EDITING ===
+   =========================== */
+
+function finishTimeEditing() {
+  if (!manualTimeInput || manualTimeInput.hidden) {
+    return;
+  }
+
+  const parsedTime =
+    parseManualTime(manualTimeInput.value);
+
+  if (parsedTime === null) {
+    // Invalid input: restore the previous valid time.
+    updateClockDisplay();
+  } else {
+    // Save the newly selected time.
+    invitation.timeMinutes = parsedTime;
+
+    // Update the display and both clock hands.
+    updateClockDisplay();
+  }
+
+  // Return to the normal selected-time display.
+  manualTimeInput.hidden = true;
+  editTimeButton.hidden = false;
+}
+
+
+// Press Enter to confirm or Escape to cancel.
+manualTimeInput?.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    finishTimeEditing();
+  }
+
+  if (event.key === "Escape") {
+    event.preventDefault();
+
+    // Restore the previously selected time.
+    updateClockDisplay();
+
+    manualTimeInput.hidden = true;
+    editTimeButton.hidden = false;
+
+    editTimeButton.focus();
+  }
+});
+
+
+// Finish editing when the user leaves the input.
+manualTimeInput?.addEventListener("blur", () => {
+  finishTimeEditing();
+});
+
+
+/* ===========================
+   === CLOCK ANGLE CALCULATION ===
+   =========================== 
+
+function angleFromPointer(event) {
+  if (!clock) return 0;
+
+  const rect = clock.getBoundingClientRect();
+
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  const dx = event.clientX - centerX;
+  const dy = event.clientY - centerY;
+
+  // Zero degrees points toward 12 o'clock.
+  const angle =
+    Math.atan2(dx, -dy) * 180 / Math.PI;
+
+  return (angle + 360) % 360;
+}
+
+
+/* ===========================
+   === UPDATE TIME FROM CLOCK ===
+   =========================== 
+
+function updateClockFromPointer(event, hand) {
+  const angle = angleFromPointer(event);
+
+  if (hand === "minute") {
+    // Each 6 degrees represents one minute.
+    const minute = Math.round(angle / 6) % 60;
+
+    // Preserve the selected hour.
+    const hour =
+      Math.floor(invitation.timeMinutes / 60);
+
+    invitation.timeMinutes =
+      hour * 60 + minute;
+  }
+
+  if (hand === "hour") {
+    // Each 30 degrees represents one hour.
+    const hourOnFace =
+      Math.round(angle / 30) % 12;
+
+    const currentHour24 =
+      Math.floor(invitation.timeMinutes / 60);
+
+    // Preserve AM/PM.
+    const isPM = currentHour24 >= 12;
+
+    let newHour = hourOnFace;
+
+    if (isPM) {
+      newHour += 12;
+    }
+
+    // Preserve the currently selected minutes.
+    const currentMinutes =
+      invitation.timeMinutes % 60;
+
+    invitation.timeMinutes =
+      newHour * 60 + currentMinutes;
+  }
+
+  // Update the displayed time and both hands.
+  updateClockDisplay();
+}
+
+
+/* ===========================
+   === CLOCK DRAGGING ===
+   =========================== 
+
+function startClockDrag(event, hand) {
+  event.preventDefault();
+
+  activeClockHand = hand;
+
+  // Capture the pointer on the clock itself.
+  // This matches the element listening for pointer movement.
+  clock?.setPointerCapture?.(event.pointerId);
+
+  updateClockFromPointer(event, hand);
+}
+
+
+function continueClockDrag(event) {
+  if (!activeClockHand) return;
+
+  updateClockFromPointer(event, activeClockHand);
+}
+
+
+function stopClockDrag() {
+  activeClockHand = null;
+}
+
+
+// Begin dragging the hour hand.
+hourHand?.addEventListener("pointerdown", (event) => {
+  startClockDrag(event, "hour");
+});
+
+
+// Begin dragging the minute hand.
+minuteHand?.addEventListener("pointerdown", (event) => {
+  startClockDrag(event, "minute");
+});
+
+
+// Continue dragging while the pointer moves.
+clock?.addEventListener("pointermove", continueClockDrag);
+
+
+// Stop dragging when the pointer is released or cancelled.
+clock?.addEventListener("pointerup", stopClockDrag);
+clock?.addEventListener("pointercancel", stopClockDrag);
+
+
+// Also stop dragging if pointer capture is lost.
+clock?.addEventListener("lostpointercapture", stopClockDrag);
+
+
+/* ===========================
+   === SET TIME BUTTON ===
+   =========================== 
+
+confirmTimeButton?.addEventListener("click", () => {
+  // Finish editing first if the input is open.
+  if (manualTimeInput && !manualTimeInput.hidden) {
+    const parsedTime =
+      parseManualTime(manualTimeInput.value);
+
+    if (parsedTime === null) {
+      // Keep the existing valid time if input is invalid.
+      updateClockDisplay();
+    } else {
+      invitation.timeMinutes = parsedTime;
+      updateClockDisplay();
+    }
+
+    manualTimeInput.hidden = true;
+
+    if (editTimeButton) {
+      editTimeButton.hidden = false;
+    }
+  }
+
+  // Update the reaction on the next scene.
+  setReaction(
+    "#place-reaction",
+    `${formatTime(invitation.timeMinutes)} it is! Now, where to? ✨`
+  );
+
+  // Navigate to the place-selection scene.
+  showScene("scene-place");
+});
+
+
+/* ===========================
+   === INITIALIZE CLOCK ===
+   =========================== */
+
+updateClockDisplay();
+
