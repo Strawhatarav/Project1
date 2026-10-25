@@ -886,3 +886,36 @@ h1 {
     font: inherit;
     cursor: pointer;
 }
+
+/* CSS supplies the appearance only.
+   JavaScript must calculate hand angles. */
+#manual-time {
+  width: min(100%, 200px);
+}
+
+/* Input occupies the same area */
+#manual-time:not([hidden]) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 8px;
+
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+}
+
+/* Hover feedback */
+#edit-time:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Never display the input when hidden */
+#manual-time[hidden] {
+  display: none;
+}
