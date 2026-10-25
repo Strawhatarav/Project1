@@ -666,7 +666,7 @@ manualTimeInput?.addEventListener("blur", () => {
 
 /* ===========================
    === CLOCK ANGLE CALCULATION ===
-   =========================== 
+   =========================== */
 
 function angleFromPointer(event) {
   if (!clock) return 0;
@@ -689,7 +689,7 @@ function angleFromPointer(event) {
 
 /* ===========================
    === UPDATE TIME FROM CLOCK ===
-   =========================== 
+   =========================== */
 
 function updateClockFromPointer(event, hand) {
   const angle = angleFromPointer(event);
@@ -738,7 +738,7 @@ function updateClockFromPointer(event, hand) {
 
 /* ===========================
    === CLOCK DRAGGING ===
-   =========================== 
+   =========================== */
 
 function startClockDrag(event, hand) {
   event.preventDefault();
@@ -792,7 +792,7 @@ clock?.addEventListener("lostpointercapture", stopClockDrag);
 
 /* ===========================
    === SET TIME BUTTON ===
-   =========================== 
+   =========================== */
 
 confirmTimeButton?.addEventListener("click", () => {
   // Finish editing first if the input is open.
