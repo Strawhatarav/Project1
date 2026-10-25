@@ -288,6 +288,111 @@
 
     </section>    
 
+    <!-- SCENE 6: CHOOSE A PLACE -->
+    <section id="scene-place" class="scene" hidden>
+
+      <div class="headings">
+        <h1>Where should we go?</h1>
+      </div>
+
+      <div class="subheading-grid">
+
+        <div class="subheadings">
+          <p id="place-reaction" class="reaction"
+          aria-live="polite">
+          Choose our little adventure.
+          </p>
+        </div>
+        
+        <div class="placesdiv">
+
+          <div class="place-grid">
+            
+            <label class="place-card">
+              <input type="radio" name="place"
+              value="Cafe">
+              
+              <img src="assets/places/box1.jpg"
+                alt="Illustration of a cafe">
+                
+              <span>A cute café</span>
+            </label>
+            
+            <label class="place-card">
+              <input type="radio" name="place"
+              value="Park">
+  
+              <img src="assets/places/box2.jpg"
+                alt="Illustration of a park">
+  
+              <span>A peaceful park</span>
+            </label>
+            
+            <label class="place-card">
+              <input type="radio" name="place"
+              value="Bookstore">
+              
+              <img src="assets/places/box3.jpg"
+              alt="Illustration of a bookstore">
+  
+              <span>A bookstore</span>
+            </label>
+            
+            <label class="place-card">
+              <input type="radio" name="place"
+              value="Arcade">
+              
+              <img src="assets/places/box4.jpg"
+              alt="Illustration of an arcade">
+              
+              <span>An arcade</span>
+            </label>
+
+            <label class="place-card">
+              <input type="radio" name="place"
+              value="newplace">
+              
+              <img src="assets/places/box5.jpg"
+              alt="Illustration of an arcade">
+              
+              <span>new place</span>
+            </label>
+
+            <label class="place-card">
+              <input type="radio" name="place"
+                value="Other">
+  
+              <span>Somewhere else</span>
+            </label>
+            
+          </div>
+
+          <div id="custom-place-group" hidden>
+
+            <label for="custom-place">Tell me your idea:</label>
+            
+            <input
+              type="text"
+              id="custom-place"
+              name="custom-place"
+              placeholder="Enter a place..."
+              maxlength="25"
+            >
+
+          </div>
+        
+        </div>
+  
+        <div class="button-group">
+          <button type="button" class="button" id="confirm-place">
+            Confirm place
+          </button>
+        </div>  
+
+      </div>
+
+    </section>
+
   </main>
 
 </body>
