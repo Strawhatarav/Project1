@@ -832,3 +832,62 @@ confirmTimeButton?.addEventListener("click", () => {
 
 updateClockDisplay();
 
+/* ================================= SCENE 6: Choose a place ================================= */
+
+const placeInputs = $$('input[name="place"]');
+const customPlaceGroup = $("#custom-place-group");
+const customPlaceInput = $("#custom-place");
+
+function updatePlaceSelection() {
+  const selected = $('input[name="place"]:checked');
+
+  invitation.place = selected ? selected.value : "";
+
+  if (customPlaceGroup) {
+    customPlaceGroup.hidden = invitation.place !== "Other";
+  }
+
+  if (invitation.place === "Other") {
+    setReaction(
+      "#place-reaction",
+      "Ooo, a mystery destination? Tell me more. 👀"
+    );
+  } else if (invitation.place) {
+    const reactions = {
+      Cafe: "A café date? Someone has taste. ☕",
+      Park: "A little fresh air and good company. 🌿",
+      Bookstore: "Books and company? That's a cute plan. 📚",
+      Arcade: "Oh, we're choosing chaos and competition! 🎮"
+    };
+
+    setReaction(
+      "#place-reaction",
+      reactions[invitation.place] || "Cute choice! 💗"
+    );
+  }
+}
+
+placeInputs.forEach((input) => {
+  input.addEventListener("change", updatePlaceSelection);
+});
+
+$("#confirm-place")?.addEventListener("click", () => {
+  if (!invitation.place) {
+    setReaction("#place-reaction", "Choose a place first. 💗");
+    return;
+  }
+
+  if (invitation.place === "Other") {
+    invitation.customPlace = customPlaceInput?.value.trim() || "";
+
+    if (!invitation.customPlace) {
+      setReaction("#place-reaction", "Tell me your mystery place first. 👀");
+      customPlaceInput?.focus();
+      return;
+    }
+  } else {
+    invitation.customPlace = "";
+  }
+
+  showScene("scene-company");
+});
