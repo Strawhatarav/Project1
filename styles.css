@@ -622,17 +622,15 @@ h1 {
 }
 
 /* Pixelated heart shape*/
+.place-card::after,
 .calendar-days .calendar-day::before {
   content: "";
   position: absolute;
-  z-index: -1;
   width: 30px;
   height: 30px;
-  inset: 0;
-  margin: auto;
-
   background-color: #d3d3d3;
 
+  /*Pixelated heart*/
   clip-path: polygon(
     0% 25%,
     12.5% 25%,
@@ -662,6 +660,13 @@ h1 {
 
   transition: background-color 180ms ease;
   pointer-events: none;
+}
+
+/* Pixelated heart shape*/
+.calendar-days .calendar-day::before {
+  z-index: -1;
+  inset: 0;
+  margin: auto;
 }
 
 /* Hover effect for unselected dates */
@@ -713,11 +718,11 @@ h1 {
 
 .displaydate {
   background-color: #ffffff;
-    text-align: center;
-    width: 270px;
-    border-radius: 12px;
-    padding: 3px 16px;
-    border: 3px solid black;
+  text-align: center;
+  width: 270px;
+  border-radius: 12px;
+  padding: 3px 16px;
+  border: 3px solid black;
 }
 
 .inner {
@@ -918,4 +923,154 @@ h1 {
 /* Never display the input when hidden */
 #manual-time[hidden] {
   display: none;
+}
+
+/* ============================
+   ===SCENE 6 CHOOSE A PLACE===
+   ============================ */
+
+
+#scene-place .scene {
+  position: relative;
+}
+
+.subheading-grid {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+/* Places container */
+.placesdiv {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Visual grid */
+.place-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 250px);
+  gap: 14px;
+  grid-auto-rows: 150px;
+  width: fit-content;
+  height: fit-content;
+}
+
+/* Individual place card */
+.place-card {
+  position: relative;
+  isolation: isolate;
+  height: 150px;
+  padding:  20px 20px 10px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  cursor: pointer;
+  
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
+  border: 4px solid #b19a73;
+  border-radius: 12px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color var(--transition-fast);
+}
+
+.place-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Hover: darken the pixel heart */
+.place-card:hover::after {
+  background-color: #ff5d5d;
+  transform: scale(1.08);
+}
+
+/* Selected: turn the heart pink-red */
+.place-card:has(input:checked)::after {
+  background-color: #ff0000;
+  
+}
+
+/* Place illustrations */
+.place-card img {
+  display: block;
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+/* Place names */
+.place-card span {
+  font-size: medium;
+  font-weight: 600;
+}
+
+/* Hide radio buttons visually without disabling them */
+.place-card input[type="radio"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.place-card::after {
+  width: 25px;
+  height: 25px;
+  top: 5px;
+  right: 10px;
+  background-color: #c9c2c2;
+
+  transition: transform 180ms ease;
+  pointer-events: none;
+}
+
+
+/* ===Custom place input group=== */
+.place-card input {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  accent-color: black;
+}
+
+#custom-place-group {
+  width: fit-content;
+  position: absolute;
+  background-color: #fffcfd;
+  padding: 10px;
+  border-radius: 16px;
+  top: 197px;
+  right: 112px
+}
+
+#custom-place,
+#manual-time {
+  display: block;
+  margin-top: 4px;
+  padding: 10px 12px;
+  color: black;
+  background: white;
+  border: 1px solid #d5c4d0;
+  border-radius: 8px;
+}
+
+#custom-place-group label {
+  display: block;
+  font-weight: 700;
 }
