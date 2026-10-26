@@ -288,6 +288,7 @@
 
     </section>    
 
+
     <!-- SCENE 6: CHOOSE A PLACE -->
     <section id="scene-place" class="scene" hidden>
 
@@ -388,6 +389,78 @@
             Confirm place
           </button>
         </div>  
+
+      </div>
+
+    </section>
+
+
+    <!-- SCENE 7: ADD SOMEONE? -->
+    <section id="scene-company" class="scene" hidden>
+
+      <div class="headings">
+        <h1>Wanna add someone?</h1>
+      </div>
+
+      <div class="GIFsandreactions">
+       <div class="character-art">
+         <img
+           src="assets/gifs/company.gif"
+           alt="Animated character reaction"
+         >
+       </div>
+ 
+       <p id="company-reaction" class="reaction"
+         aria-live="polite">
+         Just us, or a whole squad?
+       </p>
+      </div>
+
+      <div class="divcompany">
+        <fieldset class="choice-group">
+  
+          <label class="company-card">
+            <input type="radio" name="company"
+              value="Just us">
+            Just us
+          </label>
+  
+          <label class="company-card">
+            <input type="radio" name="company"
+              value="Friends">
+            Friends
+          </label>
+  
+          <label class="company-card">
+            <input type="radio" name="company"
+              value="Family">
+            Family
+          </label>
+  
+          <label class="company-card">
+            <input type="radio" name="company"
+              value="Other">
+            Someone else
+          </label>
+        </fieldset>
+  
+        <div id="custom-company-group" hidden>
+  
+          <input
+            type="text"
+            id="custom-company"
+            name="custom-company"
+            placeholder="Enter a name..."
+            maxlength="80"
+          >
+        </div>
+      </div>
+      
+      <div class="button-group">
+
+        <button type="button" id="confirm-company" class="button">
+          Next
+        </button>
 
       </div>
 
