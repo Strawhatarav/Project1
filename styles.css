@@ -1074,3 +1074,44 @@ h1 {
   display: block;
   font-weight: 700;
 }
+
+/* ==========================
+   ===SCENE 7 ADD SOMEONE?===
+   ========================== */
+
+.choice-group {
+  grid-template-columns: repeat(2, 400px);
+    grid-auto-rows: 50px;
+    justify-content: center;
+    width: 100%;
+}
+
+.divcompany {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.company-card {
+    height: 50px;
+    padding: 20px;
+}
+
+.company-card input {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  accent-color: black;
+}
+
+#custom-company-group {
+  padding: 0px;
+  border-radius: 16px;
+  top: 67px;
+  right: 53px;
+}
+
+#custom-company {
+  margin-top: 0px;
+  width: 340px;}
