@@ -622,6 +622,7 @@ h1 {
 }
 
 /* Pixelated heart shape*/
+.company-card::after,
 .place-card::after,
 .calendar-days .calendar-day::before {
   content: "";
@@ -950,6 +951,7 @@ h1 {
 }
 
 /* Visual grid */
+.choice-group,
 .place-grid {
   display: grid;
   grid-template-columns: repeat(3, 250px);
@@ -960,6 +962,7 @@ h1 {
 }
 
 /* Individual place card */
+.company-card,
 .place-card {
   position: relative;
   isolation: isolate;
@@ -987,17 +990,20 @@ h1 {
     background-color var(--transition-fast);
 }
 
+.company-card:hover,
 .place-card:hover {
   transform: translateY(-3px);
 }
 
 /* Hover: darken the pixel heart */
+.company-card:hover::after,
 .place-card:hover::after {
   background-color: #ff5d5d;
   transform: scale(1.08);
 }
 
 /* Selected: turn the heart pink-red */
+.company-card:has(input:checked)::after,
 .place-card:has(input:checked)::after {
   background-color: #ff0000;
   
@@ -1012,12 +1018,14 @@ h1 {
 }
 
 /* Place names */
+.company-card span,
 .place-card span {
   font-size: medium;
   font-weight: 600;
 }
 
 /* Hide radio buttons visually without disabling them */
+.company-card input[type="radio"],
 .place-card input[type="radio"] {
   position: absolute;
   width: 1px;
@@ -1029,6 +1037,7 @@ h1 {
   white-space: nowrap;
 }
 
+.company-card::after,
 .place-card::after {
   width: 25px;
   height: 25px;
@@ -1042,6 +1051,7 @@ h1 {
 
 
 /* ===Custom place input group=== */
+.company-card input,
 .place-card input {
   position: absolute;
   top: 8px;
@@ -1049,6 +1059,7 @@ h1 {
   accent-color: black;
 }
 
+#custom-company-group,
 #custom-place-group {
   width: fit-content;
   position: absolute;
@@ -1059,6 +1070,7 @@ h1 {
   right: 112px
 }
 
+#custom-company,
 #custom-place,
 #manual-time {
   display: block;
@@ -1070,6 +1082,7 @@ h1 {
   border-radius: 8px;
 }
 
+#custom-place-group label,
 #custom-place-group label {
   display: block;
   font-weight: 700;
@@ -1108,7 +1121,7 @@ h1 {
 #custom-company-group {
   padding: 0px;
   border-radius: 16px;
-  top: 67px;
+  top: 70px;
   right: 53px;
 }
 
