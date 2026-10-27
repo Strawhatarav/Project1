@@ -891,3 +891,57 @@ $("#confirm-place")?.addEventListener("click", () => {
 
   showScene("scene-company");
 });
+
+/* ================================= SCENE 7: Add company ================================= */
+
+const companyInputs = $$('input[name="company"]');
+const customCompanyGroup = $("#custom-company-group");
+const customCompanyInput = $("#custom-company");
+
+function updateCompanySelection() {
+  const selected = $('input[name="company"]:checked');
+
+  invitation.company = selected ? selected.value : "";
+
+  if (customCompanyGroup) {
+    customCompanyGroup.hidden = invitation.company !== "Other";
+  }
+
+  const reactions = {
+    "Just us": "Ohooo, just the two of us? How romantic. 👀💗",
+    Friends: "Oh no yaar, we got a third wheeler! 😂",
+    Family: "A whole family outing? That's an event! 😄",
+    Other: "Wait, who's this VIP? 👀"
+  };
+
+  setReaction(
+    "#company-reaction",
+    reactions[invitation.company] || "Who's joining the adventure? 💗"
+  );
+}
+
+companyInputs.forEach((input) => {
+  input.addEventListener("change", updateCompanySelection);
+});
+
+$("#confirm-company")?.addEventListener("click", () => {
+  if (!invitation.company) {
+    setReaction("#company-reaction", "Choose who's coming along. 💗");
+    return;
+  }
+
+  if (invitation.company === "Other") {
+    invitation.customCompany = customCompanyInput?.value.trim() || "";
+
+    if (!invitation.customCompany) {
+      setReaction("#company-reaction", "Who's the VIP? Add a name first. 👀");
+      customCompanyInput?.focus();
+      return;
+    }
+  } else {
+    invitation.customCompany = "";
+  }
+
+  renderFinalInvitation();
+  showScene("scene-final");
+});
