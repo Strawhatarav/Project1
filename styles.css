@@ -20,6 +20,8 @@
   --envelope-flap: url("assets/envelope/flap.svg");
   --letter-art: url("assets/envelope/letter.svg");
   --letterbg: url("assets/envelope/letterbg.svg");
+  --finalletterbg: url("assets/envelope/finalletterbg.svg");
+  --ticket: url("assets/envelope/ticket.svg");
 
   /* UI frames */
   --button-normal: url("assets/ui/normalbutton.svg");
@@ -27,8 +29,6 @@
   --button-small: url("assets/ui/smallbutton.svg");
   --calendar-frame: url("assets/ui/calendar.svg");
   --clock-face: url("assets/ui/clock.svg");
-  --place-card-frame: url("assets/ui/place-card-frame.png");
-
 }
 
 /* =====================================================
@@ -46,6 +46,7 @@
 
 html {
   min-height: 100%;
+  overflow-y: auto;
   scroll-behavior: smooth;
 }
 
@@ -209,6 +210,11 @@ img {
   overflow: visible;
 }
 
+/* Center the shorter scenes within the viewport */
+.scene:not(#scene-final) {
+  margin-block: max(30px, calc((100vh - 518px) / 2));
+}
+
 /* =====================================================
    MAIN INVITATION AND SCENE LAYOUT
    ===================================================== */
@@ -216,8 +222,9 @@ img {
 #invitation {
   width: 100%;
   min-height: 100vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 } 
 
 /* ===========================================
@@ -622,6 +629,7 @@ h1 {
 }
 
 /* Pixelated heart shape*/
+.countdown-unit,
 .company-card::after,
 .place-card::after,
 .calendar-days .calendar-day::before {
@@ -1128,3 +1136,20 @@ h1 {
 #custom-company {
   margin-top: 0px;
   width: 340px;}
+
+
+/* ==========================
+   ===SCENE 8 THE FINAL DEAL===
+   ========================== */
+
+#scene-final {
+  width: 1000px;
+  height: 935px;
+  aspect-ratio: auto;
+  background-image: var(--finalletterbg);
+  margin-top: 100px;
+  margin-bottom: 100px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
