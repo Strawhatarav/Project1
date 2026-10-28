@@ -945,3 +945,37 @@ $("#confirm-company")?.addEventListener("click", () => {
   renderFinalInvitation();
   showScene("scene-final");
 });
+
+/* ================================= SCENE 8: Final Page =================================*/ 
+
+function renderFinalInvitation() {
+  if (invitation.date) {
+    const finalDate = $("#final-date");
+
+    if (finalDate) {
+      finalDate.textContent = formatDate(invitation.date);
+      finalDate.dateTime = localDateKey(invitation.date);
+    }
+  }
+
+  setText("#final-time", formatTime(invitation.timeMinutes));
+
+  const placeName =
+    invitation.place === "Other"
+      ? invitation.customPlace
+      : invitation.place;
+
+  setText("#final-place", placeName || "Not selected");
+
+  const companyName =
+    invitation.company === "Other"
+      ? invitation.customCompany
+      : invitation.company;
+
+  setText("#final-company", companyName || "Not selected");
+
+  setReaction(
+    "#final-reaction",
+    "The plan is set... hehe, it's a date! 💗✨"
+  );
+}
