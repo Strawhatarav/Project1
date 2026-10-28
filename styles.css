@@ -1153,3 +1153,139 @@ h1 {
   text-align: center;
 }
 
+.invitation-summary {    
+  width: 500px;
+  display: flex;
+  background-image: var(--ticket);
+  background-repeat: no-repeat;
+}
+
+.summaryempty {
+  width: 50%;
+  height: 178px;
+}
+
+.summarybox {
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    width: stretch;
+    padding: 20px;
+}
+
+h3 {
+  font-weight: 700;
+  text-align: left;
+  color: red;
+  font-size: medium;
+}
+
+.summarydetails {
+display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.invitation-summary h2 {
+  margin-bottom: 18px;
+}
+
+.invitation-summary p {
+  margin-bottom: 2px;
+  overflow-wrap: anywhere;
+}
+
+.countdown-container {
+  width: fit-content;
+  box-sizing: border-box;
+  padding: 15px 30px 15px 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  color: black;
+  background-color: white;
+
+  border: 3px solid #b19a73;
+  border-radius: 16px;
+
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.headingandsubheading {
+    display: flex;
+    flex-direction: column;
+} 
+
+/* Heading */
+.countdown-heading {
+  margin: 0;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 800;
+}
+
+/* Description */
+.countdown-subheading {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Timer layout */
+.countdown {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* Individual time units */ 
+.countdown-unit {
+  flex: 1;
+  position: relative;
+  width: 130px;
+  height: 130px;
+  padding: 0px 0px 0px 0px;
+  inset: 0;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ff0000;
+}
+
+/* Countdown numbers */
+.countdown-number {
+  font-size: clamp(1.2rem, 4vw, 2.2rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+/* Labels */
+.countdown-label {
+  font-size: clamp(0.65rem, 2vw, 0.9rem);
+  font-weight: 700;
+}
+
+/* Separators */
+.countdown-separator {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+/* Final message */
+.countdown-message {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.5;
+}
