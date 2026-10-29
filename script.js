@@ -979,3 +979,152 @@ function renderFinalInvitation() {
     "The plan is set... hehe, it's a date! 💗✨"
   );
 }
+
+/* ==================================
+   === FINAL PAGE: COUNTDOWN TIMER ===
+   ================================== */
+
+const countdownDays = $("#countdown-days");
+const countdownHours = $("#countdown-hours");
+const countdownMinutes = $("#countdown-minutes");
+const countdownSeconds = $("#countdown-seconds");
+const countdownMessage = $("#countdown-message");
+
+let countdownInterval = null;
+
+/*
+  Creates the target date and time using:
+  invitation.date        -> "YYYY-MM-DD"
+  invitation.timeMinutes -> minutes after midnight
+*/
+
+function getMeetingDate() {
+  if (!(invitation.date instanceof Date)) {
+    return null;
+  }
+
+  const year = invitation.date.getFullYear();
+  const month = invitation.date.getMonth();
+  const day = invitation.date.getDate();
+
+  const timeMinutes = Number(invitation.timeMinutes);
+
+  if (
+    !Number.isInteger(timeMinutes) ||
+    timeMinutes < 0 ||
+    timeMinutes >= 1440
+  ) {
+    return null;
+  }
+
+  const hours = Math.floor(timeMinutes / 60);
+  const minutes = timeMinutes % 60;
+
+  // Build the selected meeting date and time
+  // using the visitor's local time zone.
+  const meetingDate = new Date(
+    year,
+    month,
+    day,
+    hours,
+    minutes,
+    0,
+    0
+  );
+
+  // Reject invalid dates.
+  if (
+    meetingDate.getFullYear() !== year ||
+    meetingDate.getMonth() !== month ||
+    meetingDate.getDate() !== day
+  ) {
+    return null;
+  }
+
+  return meetingDate;
+}
+
+/* Adds a leading zero to numbers below 10. */
+function padCountdownNumber(number) {
+  return String(number).padStart(2, "0");
+}
+
+/* Updates the countdown display. */
+function updateCountdown() {
+  const meetingDate = getMeetingDate();
+
+  if (!meetingDate) {
+    if (countdownMessage) {
+      countdownMessage.textContent =
+        "Choose a valid meeting date and time first. 💗";
+    }
+
+    return;
+  }
+
+  const now = new Date();
+  const difference = meetingDate.getTime() - now.getTime();
+
+  // Stop the timer when the meeting arrives.
+  if (difference <= 0) {
+    clearInterval(countdownInterval);
+    countdownInterval = null;
+
+    if (countdownDays) countdownDays.textContent = "00";
+    if (countdownHours) countdownHours.textContent = "00";
+    if (countdownMinutes) countdownMinutes.textContent = "00";
+    if (countdownSeconds) countdownSeconds.textContent = "00";
+
+    if (countdownMessage) {
+      countdownMessage.textContent =
+        "It's time for our little adventure! 💗✨";
+    }
+
+    return;
+  }
+
+  const totalSeconds = Math.floor(difference / 1000);
+
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  if (countdownDays) {
+    countdownDays.textContent = String(days);
+  }
+
+  if (countdownHours) {
+    countdownHours.textContent = padCountdownNumber(hours);
+  }
+
+  if (countdownMinutes) {
+    countdownMinutes.textContent = padCountdownNumber(minutes);
+  }
+
+  if (countdownSeconds) {
+    countdownSeconds.textContent = padCountdownNumber(seconds);
+  }
+
+  if (countdownMessage) {
+    countdownMessage.textContent =
+      "Counting down to our meeting... ✨";
+  }
+}
+
+/* Starts or restarts the countdown. */
+function startCountdown() {
+  clearInterval(countdownInterval);
+
+  updateCountdown();
+
+  countdownInterval = setInterval(updateCountdown, 1000);
+}
+
+// Start the countdown when the final invitation appears.
+const confirmCompanyButton = $("#confirm-company");
+
+confirmCompanyButton?.addEventListener("click", () => {
+  // Allow the existing company-selection handler to run first.
+  setTimeout(startCountdown, 0);
+});
